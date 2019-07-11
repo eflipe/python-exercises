@@ -1,2 +1,2 @@
 # python-exercises
-Diferentes ejercicios de exercism.io y Codewars.
+Diferentes ejercicios y ejemplos sacados de exercism.io, Codewars y otras fuentes.

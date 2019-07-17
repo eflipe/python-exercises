@@ -6,7 +6,7 @@ PASSWORDS = {'email': 'F7minlBDDuvMJuxESSKHFhTxFtjVB6',
 import sys, pyperclip
 
 if len(sys.argv) < 2:
-    print('Usage: python pw.py [account] - copy account password')
+    print('Usage: pass_list [account] - copy account password')
     sys.exit()
 account = sys.argv[1]  # the account name is stored as a string
 if account in PASSWORDS:

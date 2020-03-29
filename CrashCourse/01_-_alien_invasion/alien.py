@@ -1,6 +1,7 @@
 import sys
 
 from settings import Settings
+from ship import Ship
 
 import pygame
 
@@ -16,8 +17,7 @@ class AlienInvasion:
                                      self.settings.screen_width,
                                      self.settings.screen_height))
         pygame.display.set_caption("Invasión Extraterrestre")
-        # Color del fondo
-
+        self.ship = Ship(self)
 
     def run_game(self):
         """Iniciando el loop principal del juego."""
@@ -29,7 +29,7 @@ class AlienInvasion:
 
             # Re-dibujar la pantalla en cada loop
             self.screen.fill(self.settings.bg_color)
-
+            self.ship.blitme()
             # Dibuja la pantalla más reciente
             pygame.display.flip()
 

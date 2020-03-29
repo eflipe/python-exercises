@@ -46,15 +46,12 @@ class AlienInvasion:
                     # Detiene el movimiento
                     self.ship.moving_left = False
 
-
-
     def _update_screen(self):
         # Re-dibujar la pantalla en cada loop
         self.screen.fill(self.settings.bg_color)
         self.ship.blitme()
         # Dibuja la pantalla más reciente
         pygame.display.flip()
-
 
 
 if __name__ == '__main__':

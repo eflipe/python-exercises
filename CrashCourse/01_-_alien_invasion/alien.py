@@ -1,13 +1,15 @@
 import sys
+import pygame
+from pygame.sprite import Group
 
 from settings import Settings
 from ship import Ship
+from bullet import Bullet
 
-import pygame
 
 
 class AlienInvasion:
-    """Comportamiento general del juego"""#
+    """Comportamiento general del juego"""
     def __init__(self):
         """Initializa el juego"""
         pygame.init()
@@ -18,12 +20,14 @@ class AlienInvasion:
                                      self.settings.screen_height))
         pygame.display.set_caption("Invasión Extraterrestre")
         self.ship = Ship(self)
+        self.bullets = Group()
 
     def run_game(self):
         """Iniciando el loop principal del juego."""
         while True:
             self._check_events()
             self.ship.update()
+            self.bullets.update()
             self._update_screen()
 
     def _check_events(self):
@@ -34,7 +38,7 @@ class AlienInvasion:
             elif event.type == pygame.KEYDOWN:
                 self._check_keydown_events(event)
             elif event.type == pygame.KEYUP:
-                self_check_keyup_events(event)
+                self._check_keyup_events(event)
 
     def _check_keydown_events(self, event):
         if event.key == pygame.K_RIGHT:
@@ -43,8 +47,17 @@ class AlienInvasion:
         elif event.key == pygame.K_LEFT:
             # Mueve la nave a la izquierda
             self.ship.moving_left = True
+            # Salir con la latra Q
+        elif event.key == pygame.K_q:
+            sys.exit()
+        elif event.key == pygame.K_SPACE:
+            self._fire_bullet()
 
-    def self_check_keyup_events(self, event):
+    def _fire_bullet(self):
+        new_bullet = Bullet(self)
+        self.bullets.add(new_bullet)
+
+    def _check_keyup_events(self, event):
         if event.key == pygame.K_RIGHT:
             # Detiene el movimiento
             self.ship.moving_right = False
@@ -56,6 +69,9 @@ class AlienInvasion:
         # Re-dibujar la pantalla en cada loop
         self.screen.fill(self.settings.bg_color)
         self.ship.blitme()
+        # Dibuja los Disparos
+        for bullet in self.bullets.sprites():
+            bullet.draw_bullet()
         # Dibuja la pantalla más reciente
         pygame.display.flip()
 

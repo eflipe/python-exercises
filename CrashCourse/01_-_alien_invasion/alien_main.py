@@ -77,8 +77,22 @@ class AlienInvasion:
                 self.bullets.remove(bullet)
 
     def _create_fleet(self):
+        '''Creada la flota de aliens.
+        Crea un alien y determina cuantos aliens entran en una fila
+        Los espacios entre los aliens es igual al ancho de un alien.'''
         alien = Alien(self)
+        alien_width = alien.rect.width
+        available_space_x = self.settings.screen_width - (2 * alien_width)
+        number_aliens_x = available_space_x // (2 * alien_width)
         self.aliens.add(alien)
+
+        # Crea la primer linea de Aliens
+        for alien_number in range(number_aliens_x):
+            # Crea un alien y lo coloca en la fila
+            alien = Alien(self)
+            alien.x = alien_width + 2 * alien_width * alien_number
+            alien.rect.x = alien.x
+            self.aliens.add(alien)
 
     def _update_screen(self):
         # Re-dibujar la pantalla en cada loop

@@ -1,8 +1,11 @@
 import sys
+from time import sleep
+
 import pygame
 from pygame.sprite import Group
 
 from settings import Settings
+from game_stats import GameStats
 from ship import Ship
 from bullet import Bullet
 from alien import Alien
@@ -19,6 +22,9 @@ class AlienInvasion:
                                      self.settings.screen_width,
                                      self.settings.screen_height))
         pygame.display.set_caption("Invasión Extraterrestre")
+
+        self.stats = GameStats(self)
+
         self.ship = Ship(self)
         self.bullets = Group()
         self.aliens = Group()
@@ -77,14 +83,38 @@ class AlienInvasion:
             if bullet.rect.bottom <= 0:
                 self.bullets.remove(bullet)
 
+        self._check_bullet_alien_collisions()
+
+    def _ship_hit(self):
+        self.stats.ships_left -= 1
+
+        self.aliens.empty()
+        self.bullets.empty()
+
+        self._create_fleet()
+        self.ship.center_ship()
+
+        # Pausa
+        sleep(0.5)
+
+    def _check_bullet_alien_collisions(self):
+        '''Check la colisión entre disparos y aliens'''
+        collisions = pygame.sprite.groupcollide(
+                            self.bullets, self.aliens, True, True)
+
+        if not self.aliens:
+            # eliminas los disparos existentes y crea una nueva flota
+            self.bullets.empty()
+            self._create_fleet()
+
     def _update_aliens(self):
         self._check_fleet_edges()
         self.aliens.update()
 
-        # Check for any bullets that have hit aliens.
-        # If so, get rid of the bullet and the alien.
-        collisions = pygame.sprite.groupcollide(
-                            self.bullets, self.aliens, True, True)
+        # colision entre la nave y un alien
+        if pygame.sprite.spritecollideany(self.ship, self.aliens):
+            self._ship_hit()
+            print("Demonios!!!!!1")
 
     def _create_fleet(self):
         '''Creada la flota de aliens.
@@ -95,7 +125,7 @@ class AlienInvasion:
         available_space_x = self.settings.screen_width - (2 * alien_width)
         number_aliens_x = available_space_x // (2 * alien_width)
 
-        ship_height = self.ship.image_rect.height
+        ship_height = self.ship.rect.height
         available_space_y = (self.settings.screen_height - (3 * alien_height) - ship_height)
         number_rows = available_space_y // (2 * alien_height)
 

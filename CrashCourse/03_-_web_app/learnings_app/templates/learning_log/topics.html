@@ -3,7 +3,7 @@
 <p>Topics</p>
 <ul>
   {% for topic in topics %}
-   
+
    <li>
      <a href="{% url 'learnings_app:topic' topic.id %}">{{ topic }}</a>
    </li>
@@ -11,5 +11,8 @@
     <li>No topics</li>
   {% endfor %}
 </ul>
+
+<a href="{% url 'learnings_app:new_topic' %}">Nuevo topic</a>
+
 
 {% endblock content %}

@@ -1,12 +1,14 @@
 {% extends "learning_log/base.html" %}
+{% load bootstrap4 %}
+
 {% block content %}
-{% if form.errors %}
-<p>Your username and password están mal</p>
-{% endif %}
-<form class="" action="{% url 'users:login' %}" method="post">
+
+<form class="form" action="{% url 'users:login' %}" method="post">
   {% csrf_token %}
-  {{ form.as_p }}
-  <button name="submit">Log in</button>
+  {% bootstrap_form form %}
+  {% buttons %}
+   <button name="submit" class="btn btn-primary">Log in</button>
+  {% endbuttons %}
   <input type="hidden" name="next" value='{% url "learnings_app:index"%}'>
 </form>
 {% endblock content %}

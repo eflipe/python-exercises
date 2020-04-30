@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 
 from .models import Topic, Entry
@@ -18,7 +18,7 @@ def topics(request):
 
 @login_required
 def topic(request, topic_id):
-    topic = Topic.objects.get(id=topic_id)
+    topic = get_object_or_404(Topic, id=topic_id)
     entries = topic.entry_set.order_by('-date_added')
     context = {'topic': topic, 'entries': entries}
     return render(request, 'learning_log/topic.html', context)
@@ -34,7 +34,9 @@ def new_topic(request):
         # POST data submitted; process data.
         form = TopicForm(data=request.POST)
         if form.is_valid():
-            form.save()
+            new_topic = form.save(commit=False)
+            new_topic.user = request.user
+            new_topic.save()
             return redirect('learnings_app:topics')
     # Display a blank or invalid form
     context = {'form': form}

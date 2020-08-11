@@ -1,7 +1,8 @@
 from utils import database
 
 MENU_PROMPT = "\n>>> '1' agregar nueva palabra, '2' mostrar lista de palabras, 'f' buscar una palabra" \
-              ", 'd' borrar, 'q' salir."
+              ", 'd' borrar, 'q' salir." \
+              "\n>>> "
 
 
 def prompt_add_palabra():
@@ -20,9 +21,8 @@ def lista_palabras():
 
 
 def print_palabra(palabra):
-    print(f'Palabra: {palabra["palabra"]} : "{palabra["palabra_trad"]}"')
-    print(f'')
-    print(f'Frase: {palabra["frase"]} : "{palabra["frase_trad"]}"')
+    print(f'{palabra["palabra"]} : "{palabra["palabra_trad"]}"')
+    print(f'{palabra["frase"]} : "{palabra["frase_trad"]}"')
     print(f'')
 
 
@@ -48,7 +48,7 @@ user_options = {
 
 
 def menu():
-    database.create_table()
+    # database.create_table()
     selection = input(MENU_PROMPT)
     while selection != 'q':
         if selection in user_options:

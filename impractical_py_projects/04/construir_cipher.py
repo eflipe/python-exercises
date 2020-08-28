@@ -16,7 +16,7 @@ message = "".join(message.split())
 print(message, "\n")
 
 
-word_list = load_dict.load('C:\\Users\\Felipe\\Exercism\\python\\python-exercises\\impractical_py_projects\\02_-_p\\palabras_todas.txt')
+word_list = load_dict.load('X')
 
 vocab_list = []
 for letter in message:

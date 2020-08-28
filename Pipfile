@@ -6,6 +6,10 @@ verify_ssl = true
 [dev-packages]
 
 [packages]
+pyqrcode = "*"
+pypng = "*"
+pillow = "*"
+qrcode = "*"
 
 [requires]
 python_version = "3.7"

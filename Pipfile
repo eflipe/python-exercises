@@ -10,6 +10,7 @@ pyqrcode = "*"
 pypng = "*"
 pillow = "*"
 qrcode = "*"
+django = "*"
 
 [requires]
 python_version = "3.7"

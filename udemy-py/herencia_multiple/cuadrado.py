@@ -4,7 +4,7 @@ from color import Color
 
 
 # area del cuadrado
-class Cuadrado(FiguraGeometrica,Color):
+class Cuadrado(FiguraGeometrica, Color):
     def __init__(self, alto, ancho, color):
         FiguraGeometrica.__init__(self, alto, ancho)
         Color.__init__(self, color)

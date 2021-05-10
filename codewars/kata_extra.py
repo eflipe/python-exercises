@@ -1,5 +1,13 @@
+list_url = ['/es-es/']
+#print(list_url)
+
+ex_1 = '/es-es/'  # return nada
+
+
 def splitpart(url_value):
-    return (' ').join(url_value.split(':')[-1].split('_')).capitalize()
+    value_split = (' ').join(url_value.split('/')[-2].split('-')).capitalize()
+    print(value_split)
+    return value_split
 
 
-print(splitpart(ex_3))
+print(splitpart(ex_1))

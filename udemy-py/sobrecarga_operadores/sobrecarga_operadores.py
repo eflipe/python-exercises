@@ -1,12 +1,12 @@
-# + es un ejemplo de sobrecarga
+# + es un ejemplo de sobrecarga: un operador/signo puede actuar de diferentes formas
 a = 2
 b = 3
-print( a + b)
+print(a + b)
 
 st1 = "Hola "
 st2 = "Mundo"
-print( st1 + st2)
+print(st1 + st2)
 
-list1 = [1,2]
-list2 = [4,5]
+list1 = [1, 2]
+list2 = [4, 5]
 print(list1 + list2)

@@ -7,6 +7,7 @@ class Producto:
         self.__nombre = nombre
         self.__precio = precio
 
+    @property
     def get_precio(self):
         return self.__precio
 
@@ -14,3 +15,8 @@ class Producto:
         return f'\tID producto: {self.__id_producto}\t \
                 Nombre: {self.__nombre}\t \
                 Precio: {self.__precio}'
+
+
+if __name__ == '__main__':
+    producto1 = Producto('Botas', 555)
+    print(producto1)

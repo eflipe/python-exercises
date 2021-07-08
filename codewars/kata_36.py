@@ -9,7 +9,7 @@ import string
 
 
 def camelize(str_):
-    new_str = ''
+    new_str = ""
     index_flag = False
     for index, let in enumerate(str_.lower()):
         if let in string.punctuation or let.isspace():
@@ -26,19 +26,19 @@ def camelize(str_):
 
 
 # otra
-def camelize(str_):
-    new_str = ''
-    new_word = True
-    for elem in str_:
-        if elem.isalnum():
-            new_str += elem.upper() if new_word else elem.lower()
-            new_word = False
-        else:
-            new_word = True
-    return new_str
+# def camelize(str_):
+#     new_str = ""
+#     new_word = True
+#     for elem in str_:
+#         if elem.isalnum():
+#             new_str += elem.upper() if new_word else elem.lower()
+#             new_word = False
+#         else:
+#             new_word = True
+#     return new_str
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     text = "your-NaMe-here"  # "YourNameHere"
     text_2 = "testing ABC"  # "TestingAbc"
     text_3 = "example name"
